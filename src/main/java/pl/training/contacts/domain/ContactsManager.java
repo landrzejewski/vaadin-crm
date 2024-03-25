@@ -14,4 +14,12 @@ public class ContactsManager {
         return contactsRepository.findAll(pageConfig);
     }
 
+    public void deleteById(String id) {
+        contactsRepository.deleteById(id);
+    }
+
+    public Contact save(Contact contact) {
+        return contactsRepository.save(contact);
+    }
+
 }

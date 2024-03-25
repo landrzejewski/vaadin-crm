@@ -18,4 +18,8 @@ public class Contact {
     private Address address;
     private ContactStatus status;
 
+    public String getCity() {
+        return address != null ? address.getCity() : "";
+    }
+
 }

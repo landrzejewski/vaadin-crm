@@ -8,4 +8,8 @@ public interface ContactsRepository {
 
     ResultPage<Contact> findAll(PageConfig pageConfig);
 
+    void deleteById(String id);
+
+    Contact save(Contact contact);
+
 }
