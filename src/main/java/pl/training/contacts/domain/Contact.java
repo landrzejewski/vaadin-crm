@@ -16,5 +16,6 @@ public class Contact {
     private String lastName;
     private String email;
     private Address address;
+    private ContactStatus status;
 
 }

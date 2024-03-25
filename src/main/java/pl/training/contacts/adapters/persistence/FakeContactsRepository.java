@@ -10,6 +10,9 @@ import pl.training.contacts.ports.ContactsRepository;
 import java.util.List;
 import java.util.UUID;
 
+import static pl.training.contacts.domain.ContactStatus.ACTIVE;
+import static pl.training.contacts.domain.ContactStatus.INACTIVE;
+
 @Repository
 public class FakeContactsRepository implements ContactsRepository {
 
@@ -19,28 +22,26 @@ public class FakeContactsRepository implements ContactsRepository {
                     .firstName("Jan")
                     .lastName("Kowalski")
                     .email("jan@training.pl")
-                    .address(
-                            new Address(
-                                    "ul. Dobra 28",
-                                    "",
-                                    "61-505",
-                                    "Poznań",
-                                    "Polska")
-                    )
+                    .status(ACTIVE)
+                    .address(Address.builder()
+                            .baseInfo("ul. Dobra 28")
+                            .postalCode("61-505")
+                            .city("Poznań")
+                            .country("Polska")
+                            .build())
                     .build(),
             Contact.builder()
                     .id(UUID.randomUUID().toString())
                     .firstName("Marek")
                     .lastName("Nowak")
                     .email("marek@training.pl")
-                    .address(
-                            new Address(
-                                    "ul. Dobra 22",
-                                    "",
-                                    "61-505",
-                                    "Poznań",
-                                    "Polska")
-                    )
+                    .status(INACTIVE)
+                    .address(Address.builder()
+                            .baseInfo("ul. Dobra 110")
+                            .postalCode("61-505")
+                            .city("Poznań")
+                            .country("Polska")
+                            .build())
                     .build()
     );
 
