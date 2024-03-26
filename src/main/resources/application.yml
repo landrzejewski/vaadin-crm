@@ -1,0 +1,19 @@
+server:
+  port: 8080
+spring:
+  mustache:
+    check-template-location: false
+  datasource:
+    url: jdbc:postgresql://localhost:5432/payments
+    driver-class-name: org.postgresql.Driver
+    username: admin
+    password: admin
+  profiles:
+    active: dev
+logging:
+  level:
+    org.atmosphere: warn
+vaadin:
+  launch-browser: true
+  allowed-packages: com.vaadin,org.vaadin,dev.hilla,pl.training
+

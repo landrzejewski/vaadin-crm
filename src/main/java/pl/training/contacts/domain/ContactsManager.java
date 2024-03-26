@@ -5,6 +5,8 @@ import pl.training.commons.PageConfig;
 import pl.training.commons.ResultPage;
 import pl.training.contacts.ports.ContactsRepository;
 
+import java.util.UUID;
+
 @RequiredArgsConstructor
 public class ContactsManager {
 
@@ -19,6 +21,9 @@ public class ContactsManager {
     }
 
     public Contact save(Contact contact) {
+        if (contact.getId() == null) {
+            contact.setId(UUID.randomUUID().toString());
+        }
         return contactsRepository.save(contact);
     }
 

@@ -37,6 +37,7 @@ public class ContactForm extends FormLayout {
 
     private void initFormElements() {
         binder.bindInstanceFields(this);
+
         status.setItems(ContactStatus.values());
         status.setItemLabelGenerator(ContactStatus::name);
     }

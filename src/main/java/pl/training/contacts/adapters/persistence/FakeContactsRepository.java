@@ -1,5 +1,6 @@
 package pl.training.contacts.adapters.persistence;
 
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Repository;
 import pl.training.commons.PageConfig;
 import pl.training.commons.ResultPage;
@@ -15,6 +16,7 @@ import java.util.UUID;
 import static pl.training.contacts.domain.ContactStatus.ACTIVE;
 import static pl.training.contacts.domain.ContactStatus.INACTIVE;
 
+@Profile("test")
 @Repository
 public class FakeContactsRepository implements ContactsRepository {
 
@@ -64,9 +66,6 @@ public class FakeContactsRepository implements ContactsRepository {
 
     @Override
     public Contact save(Contact contact) {
-        if (contact.getId() == null) {
-            contact.setId(UUID.randomUUID().toString());
-        }
         contacts.put(contact.getId(), contact);
         return contact;
     }

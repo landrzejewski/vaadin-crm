@@ -16,6 +16,10 @@ import pl.training.contacts.adapters.views.ContactForm.SaveEvent;
 import pl.training.contacts.domain.Contact;
 import pl.training.contacts.domain.ContactsManager;
 
+import java.util.Collections;
+
+import static java.util.Collections.emptyList;
+
 @PageTitle("Contacts")
 @RouteAlias(value = "", layout = MainLayout.class)
 @Route(value = "contacts", layout = MainLayout.class)
@@ -62,6 +66,7 @@ public class ContactsView extends VerticalLayout {
         form.addSaveListener(this::saveContact);
         form.addDeleteListener(this::deleteContact);
         form.addCloseListener(event -> form.setVisible(false));
+        form.setMaxWidth("400px");
     }
 
     private void saveContact(SaveEvent event) {
@@ -97,7 +102,11 @@ public class ContactsView extends VerticalLayout {
     private void refreshData() {
         var pageConfig = new PageConfig(0, 100);
         var contacts = contactsManager.findAll(pageConfig).elements();
-        grid.setItems(contacts);
+        if (contacts != null) {
+            grid.setItems(contacts);
+        } else {
+            grid.setItems(emptyList());
+        }
     }
 
 }
