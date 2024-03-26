@@ -20,9 +20,11 @@ import java.util.Collections;
 
 import static java.util.Collections.emptyList;
 
+/*
 @PageTitle("Contacts")
 @RouteAlias(value = "", layout = MainLayout.class)
 @Route(value = "contacts", layout = MainLayout.class)
+*/
 public class ContactsView extends VerticalLayout {
 
     private final Grid<Contact> grid = new Grid<>();

@@ -1,1 +1,9 @@
 @import url('./main-layout.css');
+
+.info {
+    font-size: 18px;
+    color: #3d3e40;
+    margin-right: 16px;
+    border: 1px solid #dadee3;
+    padding: 8px 16px;
+}
