@@ -14,6 +14,6 @@ logging:
   level:
     org.atmosphere: warn
 vaadin:
-  launch-browser: true
+  #launch-browser: true
   allowed-packages: com.vaadin,org.vaadin,dev.hilla,pl.training
 
