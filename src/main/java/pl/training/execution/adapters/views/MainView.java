@@ -1,7 +1,7 @@
 package pl.training.execution.adapters.views;
 
 import com.vaadin.flow.component.Component;
-import com.vaadin.flow.component.formlayout.FormLayout;
+import com.vaadin.flow.component.button.Button;
 import com.vaadin.flow.component.grid.Grid;
 import com.vaadin.flow.component.html.Div;
 import com.vaadin.flow.component.orderedlayout.HorizontalLayout;
@@ -10,6 +10,9 @@ import com.vaadin.flow.component.tabs.Tab;
 import com.vaadin.flow.component.tabs.Tabs;
 import com.vaadin.flow.router.PageTitle;
 import com.vaadin.flow.router.Route;
+import com.vaadin.flow.spring.security.AuthenticationContext;
+import jakarta.annotation.security.RolesAllowed;
+import org.springframework.security.core.userdetails.UserDetails;
 import pl.training.execution.domain.Execution;
 import pl.training.execution.domain.ExecutionService;
 
@@ -19,22 +22,33 @@ import java.util.Locale;
 
 import static java.time.format.TextStyle.FULL_STANDALONE;
 
+@RolesAllowed("ADMIN")
 @PageTitle("Training management")
 @Route("")
 public class MainView extends VerticalLayout {
 
     private final ExecutionService executionService;
+    private final AuthenticationContext authenticationContext;
     private final Grid<Execution> grid = new Grid<>();
     private final ExecutionForm executionForm = new ExecutionForm();
 
-    public MainView(ExecutionService executionService) {
+    public MainView(ExecutionService executionService,  AuthenticationContext authenticationContext) {
         this.executionService = executionService;
+        this.authenticationContext = authenticationContext;
         setSizeFull();
+
+        authenticationContext.getAuthenticatedUser(UserDetails.class)
+                .ifPresent(userDetails -> {
+                    var logoutButton = new Button("Logout " + userDetails.getUsername(), event -> authenticationContext.logout());
+                    add(logoutButton);
+                });
+
         add(initStatsPanel(), initMainPanel(), initTabsPanel());
     }
 
     private VerticalLayout initStatsPanel() {
         var panel = new VerticalLayout();
+
         panel.add(createInfo("Liczba szkoleń", 0));
         panel.add(createInfo("Liczba uczestników", 0));
 
